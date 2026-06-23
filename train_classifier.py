@@ -1,10 +1,3 @@
-"""
-train_classifier.py
-Train and evaluate a YOLOv8 classification model on the prepared dataset.
-
-Usage:
-    python train_classifier.py --data cls --epochs 40 --imgsz 128
-"""
 import argparse
 from ultralytics import YOLO
 
