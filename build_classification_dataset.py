@@ -1,32 +1,13 @@
-"""
-build_classification_dataset.py
-Build a YOLOv8 image-classification dataset from FICS-PCB pre-cropped components.
-
-FICS-PCB ships component crops sorted into class folders, e.g.:
-    <board>/Microscope/components/front/1.5x/capacitors/*.png
-    <board>/DSLR/components/<board>_front/ICs/*.png
-
-This script gathers those crops into:
-    <out>/train/<class>/*.png
-    <out>/val/<class>/*.png
-    <out>/test/<class>/*.png
-assigning whole boards to a split (no board leaks across splits).
-
-Usage:
-    python build_classification_dataset.py --raw raw --out cls --boards s18 s28 s27 s29 s19
-"""
-
 import argparse
 import shutil
 from pathlib import Path
 
-# Folder name (lowercased) -> canonical class. Three well-populated classes by default.
+
 CLASS_MAP = {
     "capacitors": "capacitor", "capacitor": "capacitor",
     "resistors": "resistor", "resistor": "resistor",
     "ics": "ic", "ic": "ic",
-    # The dataset also contains these, but they are too sparse for a clean split:
-    # "inductors": "inductor", "transistors": "transistor", "diodes": "diode",
+
 }
 
 VAL_BOARDS = {"s29"}
